@@ -1,0 +1,16 @@
+#!/bin/bash
+#This is provided as an example only and works om a Oregon RMS600A
+#Checking for device
+CHECK=$(/sbin/lsusb | grep 0fde:ca01 | cut -f 6 -d " ")
+if [ "$CHECK" = "0fde:ca01" ]; then
+         echo Found Weather Station
+	  SEARCH=$(/sbin/udevadm info --export-db | grep -n PRODUCT=fde/ca01 | head -n 1 | cut -f 1 -d :)
+	  let FIND=$SEARCH-4
+	  PATHFILE=$(udevadm info --export-db | head -n $FIND | tail -n 1 | cut -f 2 -d =)
+	  echo Changing Permissions on $PATHFILE
+	  chgrp weather $PATHFILE
+else
+         echo Weather station not found
+fi
+
+sudo -u weather /home/weather/wmr100 -u YOURSQLUSER -p YOURPASSWORD
