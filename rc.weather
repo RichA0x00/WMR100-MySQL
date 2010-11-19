@@ -9,8 +9,13 @@ if [ "$CHECK" = "0fde:ca01" ]; then
 	  PATHFILE=$(udevadm info --export-db | head -n $FIND | tail -n 1 | cut -f 2 -d =)
 	  echo Changing Permissions on $PATHFILE
 	  chgrp weather $PATHFILE
+	  sudo -u weather /home/weather/wmr100 -u YOURSQLUSER -p YOURPASSWORD
+
 else
          echo Weather station not found
 fi
 
-sudo -u weather /home/weather/wmr100 -u YOURSQLUSER -p YOURPASSWORD
+
+
+
+
