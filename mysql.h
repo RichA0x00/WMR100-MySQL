@@ -5,9 +5,9 @@ timestamp TIMESTAMP DEFAULT NOW(), \
 sensor TINYINT UNSIGNED ZEROFILL, \
 smile TINYINT UNSIGNED ZEROFILL, \
 trend  char(1), \
-temp float ZEROFILL, \
+temp float, \
 humidity TINYINT UNSIGNED ZEROFILL, \
-dewpoint float ZEROFILL \
+dewpoint float  \
 );"
 
 #define TABLE_MAP_TEMP "(sensor, smile, trend, temp, humidity, dewpoint)"
